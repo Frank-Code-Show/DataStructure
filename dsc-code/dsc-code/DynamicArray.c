@@ -7,8 +7,7 @@
 // 内部辅助函数：当容量不足时候，进行扩容
 static int resize_array(DynamicArray *arr, size_t new_capacity)
 {
-
-	// realloc arr->data 老地皮的地址
+	//  realloc arr->data 老地皮的地址
 	Data *new_data = realloc(arr->data, new_capacity * sizeof(Data));
 	// 1. 最佳情况，原地扩容：地址没变，原先的老地址旁边正好有连续不断的空白地址。
 	// 2. 普遍情况，搬家扩容：地址变化，原先的数据全部搬迁到新的地址，并且，清空原先旧地址的数据
