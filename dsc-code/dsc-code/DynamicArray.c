@@ -4,40 +4,43 @@
 
 #define INITIAL_CAPACITY 10
 
-// ÄÚ²¿¸¨Öúº¯Êı£ºµ±ÈİÁ¿²»×ãÊ±ºò£¬½øĞĞÀ©Èİ
-static int resize_array(DynamicArray* arr, size_t new_capacity) {
+// å†…éƒ¨è¾…åŠ©å‡½æ•°ï¼šå½“å®¹é‡ä¸è¶³æ—¶å€™ï¼Œè¿›è¡Œæ‰©å®¹
+static int resize_array(DynamicArray *arr, size_t new_capacity)
+{
 
-	// realloc arr->data ÀÏµØÆ¤µÄµØÖ·
-	Data* new_data = realloc(arr->data, new_capacity * sizeof(Data));
-	// 1. ×î¼ÑÇé¿ö£¬Ô­µØÀ©Èİ£ºµØÖ·Ã»±ä£¬Ô­ÏÈµÄÀÏµØÖ·ÅÔ±ßÕıºÃÓĞÁ¬Ğø²»¶ÏµÄ¿Õ°×µØÖ·¡£
-	// 2. ÆÕ±éÇé¿ö£¬°á¼ÒÀ©Èİ£ºµØÖ·±ä»¯£¬Ô­ÏÈµÄÊı¾İÈ«²¿°áÇ¨µ½ĞÂµÄµØÖ·£¬²¢ÇÒ£¬Çå¿ÕÔ­ÏÈ¾ÉµØÖ·µÄÊı¾İ
+	// realloc arr->data è€åœ°çš®çš„åœ°å€
+	Data *new_data = realloc(arr->data, new_capacity * sizeof(Data));
+	// 1. æœ€ä½³æƒ…å†µï¼ŒåŸåœ°æ‰©å®¹ï¼šåœ°å€æ²¡å˜ï¼ŒåŸå…ˆçš„è€åœ°å€æ—è¾¹æ­£å¥½æœ‰è¿ç»­ä¸æ–­çš„ç©ºç™½åœ°å€ã€‚
+	// 2. æ™®éæƒ…å†µï¼Œæ¬å®¶æ‰©å®¹ï¼šåœ°å€å˜åŒ–ï¼ŒåŸå…ˆçš„æ•°æ®å…¨éƒ¨æ¬è¿åˆ°æ–°çš„åœ°å€ï¼Œå¹¶ä¸”ï¼Œæ¸…ç©ºåŸå…ˆæ—§åœ°å€çš„æ•°æ®
 
-	if (!new_data) {
-		// reallocÊ§°Ü£¬ÄÚ´æ²»×ã!
+	if (!new_data)
+	{
+		// reallocå¤±è´¥ï¼Œå†…å­˜ä¸è¶³!
 		return -1;
-		// ÎÒÕâÀïÒ»·µ»Ø£¬ÒâÎ¶×Å£¬Ô­ÏÈµÄÄÇ¸öarr->data »¹ÔÚ£¡
+		// æˆ‘è¿™é‡Œä¸€è¿”å›ï¼Œæ„å‘³ç€ï¼ŒåŸå…ˆçš„é‚£ä¸ªarr->data è¿˜åœ¨ï¼
 	}
 
-	// realloc³É¹¦Ö®ºó£¬²Å»áÓÃĞÂµÄµØÖ·È¥¸üĞÂ½á¹¹Ìå
+	// reallocæˆåŠŸä¹‹åï¼Œæ‰ä¼šç”¨æ–°çš„åœ°å€å»æ›´æ–°ç»“æ„ä½“
 	arr->data = new_data;
 	arr->capacity = new_capacity;
 
 	return 0;
 }
 
-// ´´½¨²¢³õÊ¼»¯Ò»¸ö¶¯Ì¬Êı×é
-DynamicArray* create_array(size_t initial_capcity) {
+// åˆ›å»ºå¹¶åˆå§‹åŒ–ä¸€ä¸ªåŠ¨æ€æ•°ç»„
+DynamicArray *create_array(size_t initial_capcity)
+{
 
 	if (initial_capcity == 0)
 	{
 		initial_capcity == INITIAL_CAPACITY;
 	}
-	DynamicArray* arr = (DynamicArray*)malloc(sizeof(DynamicArray));
+	DynamicArray *arr = (DynamicArray *)malloc(sizeof(DynamicArray));
 
 	/*
 	typedef struct {
-	Data* data;		// Ö¸Ïò´æ´¢Êı¾İµÄÁ¬ĞøÄÚ´æ¿é; Ö¸ÏòÒ»¸öÊı×éµÄÊ×µØÖ·
-	// int* data;	// Ëµ°×ÁË£¬ÎÒÃÇ¿ÉÒÔ·ÅºÜ¶àintÀàĞÍµÄÊı¾İ£¬ÒòÎªÖ¸ÏòµÄÊÇÒ»¸öÁ¬Ğø²»¶ÏµÄµØÖ·¿Õ¼ä
+	Data* data;		// æŒ‡å‘å­˜å‚¨æ•°æ®çš„è¿ç»­å†…å­˜å—; æŒ‡å‘ä¸€ä¸ªæ•°ç»„çš„é¦–åœ°å€
+	// int* data;	// è¯´ç™½äº†ï¼Œæˆ‘ä»¬å¯ä»¥æ”¾å¾ˆå¤šintç±»å‹çš„æ•°æ®ï¼Œå› ä¸ºæŒ‡å‘çš„æ˜¯ä¸€ä¸ªè¿ç»­ä¸æ–­çš„åœ°å€ç©ºé—´
 
 	size_t size;
 
@@ -45,14 +48,16 @@ DynamicArray* create_array(size_t initial_capcity) {
 	} DynamicArray;
 
 	*/
-	if (!arr) return NULL;
+	if (!arr)
+		return NULL;
 
-	arr->data = (Data*)malloc(initial_capcity * sizeof(Data));
-	// arr×÷Îª½á¹¹Ìå±äÁ¿£¬ËüÓĞÈı¸ö³ÉÔ±£¬ÕâÈı¸ö³ÉÔ±ÖĞ£¬×îÖØÒªµÄ¾ÍÊÇData* data;
-	// dataÖ¸ÏòÒ»¸öĞÂµÄÁ¬Ğø²»¶ÏµÄÄÚ´æ¿Õ¼ä
-	// ¶øÕû¸ö¿Õ¼ä£¬ÏÖÔÚ±»ÎÒÃÇÖ¸ÏòµÄÊÇÒ»¸öcapcity = 10µÄÊı×é
+	arr->data = (Data *)malloc(initial_capcity * sizeof(Data));
+	// arrä½œä¸ºç»“æ„ä½“å˜é‡ï¼Œå®ƒæœ‰ä¸‰ä¸ªæˆå‘˜ï¼Œè¿™ä¸‰ä¸ªæˆå‘˜ä¸­ï¼Œæœ€é‡è¦çš„å°±æ˜¯Data* data;
+	// dataæŒ‡å‘ä¸€ä¸ªæ–°çš„è¿ç»­ä¸æ–­çš„å†…å­˜ç©ºé—´
+	// è€Œæ•´ä¸ªç©ºé—´ï¼Œç°åœ¨è¢«æˆ‘ä»¬æŒ‡å‘çš„æ˜¯ä¸€ä¸ªcapcity = 10çš„æ•°ç»„
 
-	if (!arr->data) {
+	if (!arr->data)
+	{
 		free(arr);
 		return NULL;
 	}
@@ -63,18 +68,22 @@ DynamicArray* create_array(size_t initial_capcity) {
 	return arr;
 }
 
-// Ïú»ÙÊı×é£¬ÊÍ·ÅÄÚ´æ
-void destroy_array(DynamicArray* arr) {
-	if (arr) {
+// é”€æ¯æ•°ç»„ï¼Œé‡Šæ”¾å†…å­˜
+void destroy_array(DynamicArray *arr)
+{
+	if (arr)
+	{
 		free(arr->data);
 		free(arr);
 	}
 }
 
-// ÔÚÊı×éÄ©Î²×·¼ÓÔªËØ Amortized O(1)
-void array_append(DynamicArray* arr, Data value) {
-	// ¼ì²éÊÇ·ñÒªÀ©Èİ
-	if (arr->size >= arr->capacity) {
+// åœ¨æ•°ç»„æœ«å°¾è¿½åŠ å…ƒç´  Amortized O(1)
+void array_append(DynamicArray *arr, Data value)
+{
+	// æ£€æŸ¥æ˜¯å¦è¦æ‰©å®¹
+	if (arr->size >= arr->capacity)
+	{
 		size_t new_capacity = arr->capacity * 2;
 		resize_array(arr, new_capacity);
 	}
@@ -83,10 +92,12 @@ void array_append(DynamicArray* arr, Data value) {
 	arr->size++;
 }
 
-// ¶ÁÈ¡Ö¸¶¨µÄË÷ÒıÔªËØ
-// ·µ»ØÒ»¸öÖ¸Õë£¬ÒÔ±ãÄÜ¹»¼ì²éÊÇ·ñ³É¹¦£¬Èç¹ûË÷ÒıÎŞĞ§£¬·µ»ØNULL
-Data* array_read(DynamicArray* arr, size_t index) {
-	if (index >= arr->size) {
+// è¯»å–æŒ‡å®šçš„ç´¢å¼•å…ƒç´ 
+// è¿”å›ä¸€ä¸ªæŒ‡é’ˆï¼Œä»¥ä¾¿èƒ½å¤Ÿæ£€æŸ¥æ˜¯å¦æˆåŠŸï¼Œå¦‚æœç´¢å¼•æ— æ•ˆï¼Œè¿”å›NULL
+Data *array_read(DynamicArray *arr, size_t index)
+{
+	if (index >= arr->size)
+	{
 		return NULL;
 	}
 
@@ -94,10 +105,12 @@ Data* array_read(DynamicArray* arr, size_t index) {
 	return &(arr->data[index]);
 }
 
-// ¸üĞÂÖ¸¶¨Ë÷ÒıµÄÔªËØ
-// ·µ»Ø0±íÊ¾³É¹¦£¬·µ»Ø-1±íÊ¾Ê§°Ü
-int array_update(DynamicArray* arr, size_t index, Data value) {
-	if (index >= arr->size) {
+// æ›´æ–°æŒ‡å®šç´¢å¼•çš„å…ƒç´ 
+// è¿”å›0è¡¨ç¤ºæˆåŠŸï¼Œè¿”å›-1è¡¨ç¤ºå¤±è´¥
+int array_update(DynamicArray *arr, size_t index, Data value)
+{
+	if (index >= arr->size)
+	{
 		return -1;
 	}
 
@@ -105,64 +118,67 @@ int array_update(DynamicArray* arr, size_t index, Data value) {
 	return 0;
 }
 
-
-int array_insert(DynamicArray* arr, size_t index, Data value) {
-	if (index > arr->size) {
+int array_insert(DynamicArray *arr, size_t index, Data value)
+{
+	if (index > arr->size)
+	{
 		return -1;
-		// Ë÷ÒıÔ½½ç£¬ÔÊĞíÔÚÄ©Î²²åÈë, index == size
+		// ç´¢å¼•è¶Šç•Œï¼Œå…è®¸åœ¨æœ«å°¾æ’å…¥, index == size
 	}
 
-	// ¼ì²éÊÇ·ñÒªÀ©Èİ
-	if (arr->size >= arr->capacity) {
+	// æ£€æŸ¥æ˜¯å¦è¦æ‰©å®¹
+	if (arr->size >= arr->capacity)
+	{
 
-		// º¯ÊıºÏÔ¼ The Function Contract
-		if (resize_array(arr, arr->capacity * 2) != 0) {
+		// å‡½æ•°åˆçº¦ The Function Contract
+		if (resize_array(arr, arr->capacity * 2) != 0)
+		{
 			return -1;
 		}
-
 	}
 
-	for (size_t i = arr->size; i > index; --i) {
+	for (size_t i = arr->size; i > index; --i)
+	{
 		arr->data[i] = arr->data[i - 1];
 	}
 
 	/*
 
 	arr->data = [10, 20, 30, 40]
-	arr->data = [10, 20, 30, 40, ¡õ]
+	arr->data = [10, 20, 30, 40, â–¡]
 
 
-	arr->data = [10, 99, 20, 30, 40, ¡õ]
+	arr->data = [10, 99, 20, 30, 40, â–¡]
 	arr->size = 4;
-	index = 1 Ä¿±êÎ»ÖÃ
+	index = 1 ç›®æ ‡ä½ç½®
 	capacity 8
 
 	1.
 		i arr->size i = 4;
 		i > index 4>1 t
 		arr->data[4] = arr->data[3];
-		°ÑË÷Òı3µÄÖµ(40) ¸´ÖÆµ½ Ë÷Òı4ÉÏ£¨¿Õ°×£©
-			arr->data = [10, 20, 30, ¡õ, 40]
+		æŠŠç´¢å¼•3çš„å€¼(40) å¤åˆ¶åˆ° ç´¢å¼•4ä¸Šï¼ˆç©ºç™½ï¼‰
+			arr->data = [10, 20, 30, â–¡, 40]
 
-	
+
 	*/
-
 
 	arr->data[index] = value;
 
 	arr->size++;
 	return 0;
-
 }
 
-// É¾³ıÖ¸¶¨Ë÷ÒıµÄÔªËØ
-int array_delete(DynamicArray* arr, size_t index) {
-	if (index >= arr->size) {
+// åˆ é™¤æŒ‡å®šç´¢å¼•çš„å…ƒç´ 
+int array_delete(DynamicArray *arr, size_t index)
+{
+	if (index >= arr->size)
+	{
 		return -1;
 	}
 
-
-	for (size_t i = index; i < arr->size - 1; ++i) {
+	for (size_t i = index; i < arr->size - 1; ++i)
+	{
 		arr->data[i] = arr->data[i + 1];
 	}
 
@@ -170,29 +186,32 @@ int array_delete(DynamicArray* arr, size_t index) {
 
 	arr->data = [10, 20, 30, 40, 50]
 
-	arr->data = [10, , 30, 40, ¡õ]
+	arr->data = [10, , 30, 40, â–¡]
 
-	
+
 	*/
 
 	arr->size--;
 
 	// size capacity 1/4,
 
-	if (arr->size > 0 & arr->size <= arr->capacity / 4 && arr->capacity > INITIAL_CAPACITY) {
+	if (arr->size > 0 && arr->size <= arr->capacity / 4 && arr->capacity > INITIAL_CAPACITY)
+	{
 		size_t new_capacity = arr->capacity / 2;
 
-		// ±£Ö¤ËõÈİºóµÄÈİÁ¿ÈÔÈ»ÄÜ¹»×°µÃÏÂËùÓĞÔªËØ£¬²¢ÇÒ²»»áĞ¡ÓÚ³õÊ¼ÈİÁ¿
-		if (new_capacity < arr->size) {
+		// ä¿è¯ç¼©å®¹åçš„å®¹é‡ä»ç„¶èƒ½å¤Ÿè£…å¾—ä¸‹æ‰€æœ‰å…ƒç´ ï¼Œå¹¶ä¸”ä¸ä¼šå°äºåˆå§‹å®¹é‡
+		if (new_capacity < arr->size)
+		{
 			new_capacity = arr->size;
 		}
 
-		if (new_capacity < INITIAL_CAPACITY) {
+		if (new_capacity < INITIAL_CAPACITY)
+		{
 			new_capacity = INITIAL_CAPACITY;
 		}
 
-		printf("\n---> [ËõÈİ¾¯¸æ!] Size (%zu) <= Capacity/4 (%zu). ×¼±¸ËõÈİÖÁ %zu. \n",
-			arr->size, arr->capacity / 4, new_capacity);
+		printf("\n---> [ç¼©å®¹è­¦å‘Š!] Size (%zu) <= Capacity/4 (%zu). å‡†å¤‡ç¼©å®¹è‡³ %zu. \n",
+			   arr->size, arr->capacity / 4, new_capacity);
 
 		resize_array(arr, new_capacity);
 	}
@@ -200,23 +219,25 @@ int array_delete(DynamicArray* arr, size_t index) {
 	return 0;
 }
 
-// print_arrayµÚ¶ş¸ö²ÎÊı£¬ÒªÇó´«µİÒ»¸öÖ¸Ïòº¯ÊıµÄÖ¸Õë
-// Õâ¸ö´«µİµÄº¯Êı±ØĞëÂú×ãÌõ¼şÊÇ²ÎÊı±ØĞëÊÇconst void*
-void print_array(const DynamicArray* arr, void (*print_func)(const void* data)){
-	if (!print_func) {
-		printf("´íÎó£ºÎ´Ìá¹©ÓĞĞ§µÄ´òÓ¡º¯Êı!\n");
+// print_arrayç¬¬äºŒä¸ªå‚æ•°ï¼Œè¦æ±‚ä¼ é€’ä¸€ä¸ªæŒ‡å‘å‡½æ•°çš„æŒ‡é’ˆ
+// è¿™ä¸ªä¼ é€’çš„å‡½æ•°å¿…é¡»æ»¡è¶³æ¡ä»¶æ˜¯å‚æ•°å¿…é¡»æ˜¯const void*
+void print_array(const DynamicArray *arr, void (*print_func)(const void *data))
+{
+	if (!print_func)
+	{
+		printf("é”™è¯¯ï¼šæœªæä¾›æœ‰æ•ˆçš„æ‰“å°å‡½æ•°!\n");
 		return;
 	}
-	
+
 	printf("Array (Size: %zu, Capacity: %zu): [\n", arr->size, arr->capacity);
 
 	for (size_t i = 0; i < arr->size; i++)
 	{
 		printf("	");
-		
-		// ¹Ø¼üÊÇ£¬µ÷ÓÃÍâ²¿´«ÈëµÄº¯ÊıÖ¸Õë£¬À´´òÓ¡Ã¿Ò»¸öÔªËØ
-		// ÎÒÃÇĞèÒª´«µİÃ¿¸öÔªËØµÄµØÖ· &arr->data[i]
-		// ÒòÎªprint_func½ÓÊÕÒ»¸övoid*Ö¸Õë
+
+		// å…³é”®æ˜¯ï¼Œè°ƒç”¨å¤–éƒ¨ä¼ å…¥çš„å‡½æ•°æŒ‡é’ˆï¼Œæ¥æ‰“å°æ¯ä¸€ä¸ªå…ƒç´ 
+		// æˆ‘ä»¬éœ€è¦ä¼ é€’æ¯ä¸ªå…ƒç´ çš„åœ°å€ &arr->data[i]
+		// å› ä¸ºprint_funcæ¥æ”¶ä¸€ä¸ªvoid*æŒ‡é’ˆ
 
 		print_func(&arr->data[i]);
 		printf("\n");
