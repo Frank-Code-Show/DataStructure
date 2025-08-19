@@ -476,80 +476,15 @@
                             { nodes: [{ id: 'B', label: 'B', x: 400, y: 80, balance: -2, type: 'critical' }, { id: 'A', label: 'A', x: 250, y: 180, balance: 0, type: 'subtree' }, { id: 'D', label: 'D', x: 550, y: 180, balance: -1, type: 'pivot' }, { id: 'C', label: 'C', x: 450, y: 280, balance: 0, type: 'subtree' }, { id: 'F', label: 'F', x: 650, y: 280, balance: 0, type: 'important' }, { id: 'E', label: 'E', x: 600, y: 380, balance: 0, type: 'subtree' }, { id: 'G', label: 'G', x: 700, y: 380, balance: 0, type: 'subtree' }], edges: [{ id: 'B-A' }, { id: 'B-D' }, { id: 'D-C' }, { id: 'D-F' }, { id: 'F-E' }, { id: 'F-G' }], arrow: { path: 'M 370 110 Q 330 140 370 180' } },
                             { nodes: [{ id: 'D', label: 'D', x: 400, y: 80, balance: 0, type: 'pivot' }, { id: 'B', label: 'B', x: 250, y: 180, balance: 0, type: 'critical' }, { id: 'F', label: 'F', x: 550, y: 180, balance: 0, type: 'important' }, { id: 'A', label: 'A', x: 150, y: 280, balance: 0, type: 'subtree' }, { id: 'C', label: 'C', x: 350, y: 280, balance: 0, type: 'subtree' }, { id: 'E', label: 'E', x: 450, y: 280, balance: 0, type: 'subtree' }, { id: 'G', label: 'G', x: 650, y: 280, balance: 0, type: 'subtree' }], edges: [{ id: 'D-B' }, { id: 'D-F' }, { id: 'B-A' }, { id: 'B-C' }, { id: 'F-E' }, { id: 'F-G' }], arrow: null }
                         ],
-                        // LL 场景
                         'LL': [
-                            {
-                                nodes: [
-                                    { id: 'C', label: 'C', x: 400, y: 80, balance: 2, type: 'critical' },
-                                    { id: 'B', label: 'B', x: 250, y: 180, balance: 1, type: 'important' },
-                                    { id: 'D', label: 'D', x: 550, y: 180, balance: 0, type: 'subtree' },
-                                    { id: 'A', label: 'A', x: 150, y: 280, balance: 0, type: 'pivot' },
-                                    { id: 'E', label: 'E', x: 350, y: 280, balance: 0, type: 'subtree' },
-                                    { id: 'F', label: 'F', x: 100, y: 380, balance: 0, type: 'subtree' },
-                                    { id: 'G', label: 'G', x: 200, y: 380, balance: 0, type: 'subtree' }
-                                ],
-                                edges: [
-                                    { id: 'C-B' }, { id: 'C-D' },
-                                    { id: 'B-A' }, { id: 'B-E' },
-                                    { id: 'A-F' }, { id: 'A-G' }
-                                ],
-                                arrow: { path: 'M 430 110 Q 470 140 430 180' }
-                            },
-                            {
-                                nodes: [
-                                    { id: 'B', label: 'B', x: 400, y: 80, balance: 0, type: 'important' },
-                                    { id: 'A', label: 'A', x: 250, y: 180, balance: 0, type: 'pivot' },
-                                    { id: 'C', label: 'C', x: 550, y: 180, balance: 0, type: 'critical' },
-                                    { id: 'F', label: 'F', x: 150, y: 280, balance: 0, type: 'subtree' },
-                                    { id: 'G', label: 'G', x: 350, y: 280, balance: 0, type: 'subtree' },
-                                    { id: 'E', label: 'E', x: 450, y: 280, balance: 0, type: 'subtree' },
-                                    { id: 'D', label: 'D', x: 650, y: 280, balance: 0, type: 'subtree' }
-                                ],
-                                edges: [
-                                    { id: 'B-A' }, { id: 'B-C' },
-                                    { id: 'A-F' }, { id: 'A-G' },
-                                    { id: 'C-E' }, { id: 'C-D' }
-                                ],
-                                arrow: null
-                            }
+                            { nodes: [{ id: 'C', label: 'C', x: 400, y: 80, balance: 2, type: 'critical' }, { id: 'B', label: 'B', x: 250, y: 180, balance: 1, type: 'important' }, { id: 'D', label: 'D', x: 550, y: 180, balance: 0, type: 'subtree' }, { id: 'A', label: 'A', x: 150, y: 280, balance: 0, type: 'pivot' }, { id: 'BR', label: 'BR', x: 350, y: 280, balance: 0, type: 'subtree' }], edges: [{ id: 'C-B' }, { id: 'C-D' }, { id: 'B-A' }, { id: 'B-BR' }], arrow: { path: 'M 430 110 Q 470 140 430 180' } },
+                            // --- CORRECTED AND VERIFIED STATE ---
+                            { nodes: [{ id: 'B', label: 'B', x: 400, y: 80, balance: -1, type: 'important' }, { id: 'A', label: 'A', x: 250, y: 180, balance: 0, type: 'pivot' }, { id: 'C', label: 'C', x: 550, y: 180, balance: 0, type: 'critical' }, { id: 'BR', label: 'BR', x: 450, y: 280, balance: 0, type: 'subtree' }, { id: 'D', label: 'D', x: 650, y: 280, balance: 0, type: 'subtree' }], edges: [{ id: 'B-A' }, { id: 'B-C' }, { id: 'C-BR' }, { id: 'C-D' }], arrow: null }
                         ],
-
-                        // RR 场景
                         'RR': [
-                            {
-                                nodes: [
-                                    { id: 'A', label: 'A', x: 400, y: 80, balance: -2, type: 'critical' },
-                                    { id: 'B', label: 'B', x: 550, y: 180, balance: -1, type: 'important' },
-                                    { id: 'C', label: 'C', x: 650, y: 280, balance: 0, type: 'pivot' },
-                                    { id: 'D', label: 'D', x: 250, y: 180, balance: 0, type: 'subtree' },
-                                    { id: 'E', label: 'E', x: 450, y: 280, balance: 0, type: 'subtree' },
-                                    { id: 'F', label: 'F', x: 600, y: 380, balance: 0, type: 'subtree' },
-                                    { id: 'G', label: 'G', x: 700, y: 380, balance: 0, type: 'subtree' }
-                                ],
-                                edges: [
-                                    { id: 'A-D' }, { id: 'A-B' },
-                                    { id: 'B-E' }, { id: 'B-C' },
-                                    { id: 'C-F' }, { id: 'C-G' }
-                                ],
-                                arrow: { path: 'M 370 110 Q 330 140 370 180' }
-                            },
-                            {
-                                nodes: [
-                                    { id: 'B', label: 'B', x: 400, y: 80, balance: 0, type: 'important' },
-                                    { id: 'A', label: 'A', x: 250, y: 180, balance: 0, type: 'critical' },
-                                    { id: 'C', label: 'C', x: 550, y: 180, balance: 0, type: 'pivot' },
-                                    { id: 'D', label: 'D', x: 150, y: 280, balance: 0, type: 'subtree' },
-                                    { id: 'E', label: 'E', x: 350, y: 280, balance: 0, type: 'subtree' },
-                                    { id: 'F', label: 'F', x: 450, y: 280, balance: 0, type: 'subtree' },
-                                    { id: 'G', label: 'G', x: 650, y: 280, balance: 0, type: 'subtree' }
-                                ],
-                                edges: [
-                                    { id: 'B-A' }, { id: 'B-C' },
-                                    { id: 'A-D' }, { id: 'A-E' },
-                                    { id: 'C-F' }, { id: 'C-G' }
-                                ],
-                                arrow: null
-                            }
+                            { nodes: [{ id: 'A', label: 'A', x: 400, y: 80, balance: -2, type: 'critical' }, { id: 'AL', label: 'AL', x: 250, y: 180, balance: 0, type: 'subtree' }, { id: 'B', label: 'B', x: 550, y: 180, balance: -1, type: 'important' }, { id: 'BL', label: 'BL', x: 450, y: 280, balance: 0, type: 'subtree' }, { id: 'C', label: 'C', x: 650, y: 280, balance: 0, type: 'pivot' }], edges: [{ id: 'A-AL' }, { id: 'A-B' }, { id: 'B-BL' }, { id: 'B-C' }], arrow: { path: 'M 370 110 Q 330 140 370 180' } },
+                            // --- VERIFIED STATE ---
+                            { nodes: [{ id: 'B', label: 'B', x: 400, y: 80, balance: 1, type: 'important' }, { id: 'A', label: 'A', x: 250, y: 180, balance: 0, type: 'critical' }, { id: 'C', label: 'C', x: 550, y: 180, balance: 0, type: 'pivot' }, { id: 'AL', label: 'AL', x: 150, y: 280, balance: 0, type: 'subtree' }, { id: 'BL', label: 'BL', x: 350, y: 280, balance: 0, type: 'subtree' }], edges: [{ id: 'B-A' }, { id: 'B-C' }, { id: 'A-AL' }, { id: 'A-BL' }], arrow: null }
                         ]
                     };
                 },
